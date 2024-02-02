@@ -31,7 +31,8 @@ def deobfuscateFile(file_name, omit_first_bytes):
         enc_bytes.append(0)
     enc_bytes = getCipher().decrypt(bytes(enc_bytes))
     data = inflate(enc_bytes)
-    print(data)
+    text = data.decode("utf-8") # this way we actually output real utf-8, instead of the raw binary bits. This saves us all the by hand cleanup.
+    print(text)
 
 def deflate(data):
     compress = zlib.compressobj(-1, zlib.DEFLATED, -15)
