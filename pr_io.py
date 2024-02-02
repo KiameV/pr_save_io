@@ -32,6 +32,9 @@ def deobfuscateFile(file_name, omit_first_bytes):
     enc_bytes = getCipher().decrypt(bytes(enc_bytes))
     data = inflate(enc_bytes)
     text = data.decode("utf-8") # this way we actually output real utf-8, instead of the raw binary bits. This saves us all the by hand cleanup.
+    file = open("temp.txt", "w", encoding="utf8")  # we can write a temp.txt file in case the console being used isn't in utf8 mode (more common than you think)
+    file.write(text)
+    file.close()
     print(text)
 
 def deflate(data):
